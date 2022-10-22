@@ -8,9 +8,13 @@ FROM node:18-alpine AS build
 
 WORKDIR /app
 COPY --from=dependencies /app/node_modules ./node_modules
-COPY . .
+
 ARG DATABASE_URL
 ENV DATABASE_URL $DATABASE_URL
+RUN printenv >> .env
+
+COPY . .
+
 
 RUN npx prisma generate
 RUN yarn build
