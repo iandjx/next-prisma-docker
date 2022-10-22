@@ -5,6 +5,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 const prisma = new PrismaClient();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
+  const a = process.env.DATABASE_URL
+  console.log(a)
   const users = await prisma.users.findMany();
   res.status(200).json(users);
 }
