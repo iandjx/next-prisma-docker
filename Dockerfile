@@ -16,7 +16,7 @@ RUN printenv >> .env
 COPY . .
 
 
-RUN npx prisma generate
+RUN npx prisma migrate deploy
 RUN yarn build
 
 FROM node:18-alpine AS deploy
@@ -35,4 +35,4 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["startup.sh"]
+CMD node server.js
